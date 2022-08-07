@@ -10,8 +10,6 @@ function dateToString(date) {
 }
 
 function App() {
-  const apiDest = "localhost:8080";
-
   const [date, setDate] = useState(dateToString(new Date()));
   console.log(date);
   const [log, setLog] = useState("");
@@ -35,7 +33,7 @@ function App() {
     
     setLog(log + "\n Writing to " + date + "...");
 
-    fetch(`http://${apiDest}/create`, {
+    fetch(`/create`, {
       method: 'POST',
       body: JSON.stringify(request),
     })
@@ -47,7 +45,7 @@ function App() {
 
   function commit() {
     setLog(log + "\n Committing...");
-    fetch(`http://${apiDest}/commit`, {
+    fetch(`/commit`, {
         method: 'POST',
     }).then(res => res.text())
     .then(res => {
